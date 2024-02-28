@@ -1,8 +1,8 @@
 import argparse
 import yadisk
 import image_concatenator as imc
-from PIL import Image # , ImageFile
-# ImageFile.LOAD_TRUNCATED_IMAGES = True
+from PIL import Image , ImageFile
+ImageFile.LOAD_TRUNCATED_IMAGES = True
 import requests
 from io import BytesIO
 
@@ -29,7 +29,7 @@ with client:
         items = client.public_listdir(args.url)
         for item in items:
             print(item.name)
-            files = item.public_listdir(path=item.path + '/')
+            files = item.public_listdir(path=item.path + '/', limit=20)
             images = []
             for file in files:
                 response = requests.get(file.file)
